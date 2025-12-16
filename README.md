@@ -1,2 +1,14 @@
-# food-orderring-website
-A food delivery application that allows users to browse restaurants, view menus, add items to cart, and place orders with a responsive user interface.
+#Food Delivery App
+A food delivery application built to simulate online food ordering platforms.
+
+Features
+Browse restaurants
+View food menu
+Add to cart
+Order summary
+Responsive design
+
+Technologies Used
+HTML
+CSS
+JavaScript
