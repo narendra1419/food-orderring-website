@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - REX Food Delivery</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/css/consolidated-styles.css" as="style">
+  <link rel="preload" href="assets/js/app-optimized.js" as="script">
+  
+  <!-- External fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Consolidated Stylesheet -->
+  <link rel="stylesheet" href="assets/css/consolidated-styles.css">
+  
+  <!-- Meta tags for SEO -->
+  <meta name="description" content="Login to your REX Food Delivery account">
+  <meta name="keywords" content="login, food delivery, account">
+  <meta name="author" content="TEAM REX">
+  
+  <!-- Security headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;">
+</head>
+<body>
+  
+  <!-- Background Video -->
+  <div class="video-container">
+    <video autoplay muted loop class="background-video" playsinline>
+
+      <source src="https://drive.google.com/uc?export=download&id=1R-PQO6Z_LIDxqI6MdxMzabeyCz56KEGN" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <section class="section" style="min-height: 100vh; display: flex; align-items: center;">
+      <div class="container">
+        <div class="form-container" style="max-width: 500px;">
+          <div class="text-center" style="margin-bottom: var(--spacing-lg);">
+            <h1>Welcome Back</h1>
+            <p class="section-subtitle">Log in to access your account and enjoy personalized features</p>
+          </div>
+          
+          <!-- Login Form -->
+          <form id="login-form" class="login-form" novalidate>
+            <fieldset>
+              <legend>Login Form</legend>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  placeholder="Enter your email address" 
+                  required 
+                  autocomplete="email"
+                  aria-describedby="email-error"
+                >
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div style="position: relative;">
+                  <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password" 
+                    required 
+                    autocomplete="current-password"
+                    aria-describedby="password-error"
+                  >
+                  <button 
+                    type="button" 
+                    class="password-toggle" 
+                    onclick="togglePassword('password')"
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;"
+                    aria-label="Toggle password visibility"
+                  >
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Remember Me -->
+              <div class="form-group">
+                <label style="display: flex; align-items: center; gap: var(--spacing-xs);">
+                  <input type="checkbox" id="remember" name="remember" style="width: auto;">
+                  <span>Remember me</span>
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <span class="btn-text">Login</span>
+                  <span class="loading" style="display: none;"></span>
+                </button>
+              </div>
+            </fieldset>
+          </form>
+
+          <!-- Social Login Buttons -->
+          <div class="form-actions">
+            <button 
+              class="btn" 
+              style="background: #db4437; color: white; width: 100%; margin-top: var(--spacing-sm);"
+              onclick="loginWithGoogle()"
+            >
+              <i class="fab fa-google" style="margin-right: var(--spacing-xs);"></i>
+              Login with Google
+            </button>
+            <button 
+              class="btn" 
+              style="background: #3b5998; color: white; width: 100%; margin-top: var(--spacing-sm);"
+              onclick="loginWithFacebook()"
+            >
+              <i class="fab fa-facebook" style="margin-right: var(--spacing-xs);"></i>
+              Login with Facebook
+            </button>
+          </div>
+
+          <!-- Signup Link -->
+          <div class="text-center" style="margin-top: var(--spacing-lg);">
+            <p>Don't have an account? <a href="signup.html" class="btn-link">Sign Up</a></p>
+            <p><a href="#" class="btn-link" onclick="showForgotPassword()">Forgot Password?</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Reusable Footer Component -->
+  <div id="footer-container"></div>
+
+  <!-- Optimized JavaScript -->
+  <script src="assets/js/app-optimized.js"></script>
+  
+  <!-- Additional Login Functionality -->
+  <script>
+    // Password toggle functionality
+    function togglePassword(inputId) {
+      const input = document.getElementById(inputId);
+      const icon = input.nextElementSibling.querySelector('i');
+      
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'fas fa-eye';
+      }
+    }
+
+    // Social login handlers
+    function loginWithGoogle() {
+      console.log('Google login clicked');
+      // In a real application, you would integrate with Google OAuth
+      window.authManager.showNotification('Google login feature coming soon!', 'info');
+    }
+
+    function loginWithFacebook() {
+      console.log('Facebook login clicked');
+      // In a real application, you would integrate with Facebook Login
+      window.authManager.showNotification('Facebook login feature coming soon!', 'info');
+    }
+
+    // Forgot password handler
+    function showForgotPassword() {
+      const email = document.getElementById('email').value;
+      if (email) {
+        window.authManager.showNotification(`Password reset instructions sent to ${email}`, 'info');
+      } else {
+        window.authManager.showNotification('Please enter your email address first', 'error');
+        document.getElementById('email').focus();
+      }
+    }
+
+    // Enhanced form validation
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      let isValid = true;
+
+      // Clear previous errors
+      document.querySelectorAll('.field-error').forEach(error => error.remove());
+      document.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+
+
+      // Validate email
+      if (!email.value.trim()) {
+        showFieldError(email, 'Email is required');
+        isValid = false;
+      } else if (!window.FormValidator.validateEmail(email.value)) {
+        showFieldError(email, 'Please enter a valid email address');
+        isValid = false;
+      }
+
+      // Validate password
+      if (!password.value.trim()) {
+        showFieldError(password, 'Password is required');
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Let the AuthManager handle the actual login
+        console.log('Form is valid, proceeding with login...');
+      }
+    });
+
+    // Field error helper
+    function showFieldError(field, message) {
+      field.classList.add('error');
+      
+      const errorElement = document.createElement('div');
+      errorElement.className = 'field-error';
+      errorElement.textContent = message;
+      errorElement.style.color = 'var(--primary-color)';
+      errorElement.style.fontSize = '0.9rem';
+      errorElement.style.marginTop = '0.25rem';
+      
+      field.parentNode.appendChild(errorElement);
+    }
+
+    // Auto-focus first empty field
+    document.addEventListener('DOMContentLoaded', function() {
+      const emailField = document.getElementById('email');
+      if (!emailField.value) {
+        emailField.focus();
+      }
+    });
+  </script>
+  
+  <!-- Component Loader -->
+  <script>
+    // Load footer component (header not needed for login page)
+    fetch('components/footer.html')
+      .then(r => r.text())
+      .then(footerHtml => {
+        document.getElementById('footer-container').innerHTML = footerHtml;
+        
+        // Execute footer scripts
+        const footerScript = document.createElement('script');
+        footerScript.textContent = document.querySelector('#footer-container script').textContent;
+        document.head.appendChild(footerScript);
+      })
+      .catch(error => {
+        console.error('Error loading footer component:', error);
+      });
+  </script>
+
+
+  <!-- Additional CSS for login page -->
+  <style>
+    /* Ensure form container is properly visible */
+    .form-container {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(15px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Fieldset styling */
+    .form-container fieldset {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Form group styling with forced visibility */
+    .form-group {
+      margin-bottom: var(--spacing-md) !important;
+      position: relative;
+    }
+
+    /* Label styling */
+    .form-group label {
+      display: block;
+      color: var(--text-light) !important;
+      font-weight: 600 !important;
+      margin-bottom: var(--spacing-xs);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Input styling with forced backgrounds and colors */
+    .form-group input {
+      width: 100% !important;
+      padding: var(--spacing-sm) !important;
+      border: 2px solid rgba(255, 255, 255, 0.3) !important;
+      border-radius: var(--radius-md) !important;
+      font-size: 1rem !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+      color: #333333 !important;
+      transition: var(--transition-normal) !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Input focus styling */
+    .form-group input:focus {
+      border-color: var(--primary-color) !important;
+      box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1) !important;
+      background: #ffffff !important;
+      outline: none !important;
+    }
+
+    /* Placeholder styling */
+    .form-group input::placeholder {
+      color: #666666 !important;
+      opacity: 0.8;
+    }
+
+    /* Password toggle styling */
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: var(--spacing-xs);
+      border-radius: var(--radius-sm);
+      transition: var(--transition-normal);
+    }
+
+    .password-toggle:hover {
+      color: var(--primary-color);
+      background: rgba(255, 71, 87, 0.1);
+    }
+
+    /* Remember me checkbox */
+    .form-group input[type="checkbox"] {
+      width: auto !important;
+      margin-right: var(--spacing-xs) !important;
+      accent-color: var(--primary-color);
+    }
+
+    .form-group label:has(input[type="checkbox"]) {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      cursor: pointer;
+      color: var(--text-light) !important;
+    }
+
+    /* Button styling */
+    .btn {
+      background: var(--primary-color) !important;
+      color: var(--text-light) !important;
+      border: none !important;
+      padding: var(--spacing-sm) var(--spacing-lg) !important;
+      border-radius: var(--radius-md) !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      transition: var(--transition-normal) !important;
+      width: 100% !important;
+      font-size: 1.1rem !important;
+    }
+
+    .btn:hover {
+      background: #e63b4d !important;
+      transform: translateY(-2px) !important;
+    }
+
+    /* Social login buttons */
+    .btn-google {
+      background: #db4437 !important;
+      color: white !important;
+    }
+
+    .btn-facebook {
+      background: #3b5998 !important;
+      color: white !important;
+    }
+
+    /* Links styling */
+    .btn-link {
+      color: var(--primary-color) !important;
+      text-decoration: none !important;
+      font-weight: 600 !important;
+      transition: var(--transition-normal) !important;
+    }
+
+    .btn-link:hover {
+      color: var(--accent-color) !important;
+      text-decoration: underline !important;
+    }
+
+    /* Error styling */
+    .error {
+      border-color: var(--primary-color) !important;
+      box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1) !important;
+    }
+
+    .field-error {
+      animation: slideDown 0.3s ease;
+      color: var(--primary-color) !important;
+      font-size: 0.9rem !important;
+      margin-top: 0.25rem !important;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Ensure text is visible on dark background */
+    .text-center h1 {
+      color: var(--text-light) !important;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7) !important;
+    }
+
+    .section-subtitle {
+      color: var(--text-light) !important;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.7) !important;
+    }
+
+    /* Container positioning */
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Background video should not interfere */
+    .video-container {
+      z-index: -1;
+    }
+  </style>
+
+</body>
+</html>

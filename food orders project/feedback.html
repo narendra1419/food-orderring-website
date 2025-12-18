@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - REX Food Delivery</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/css/consolidated-styles.css" as="style">
+    <link rel="preload" href="assets/js/app-optimized.js" as="script">
+    
+    <!-- External fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Consolidated Stylesheet -->
+    <link rel="stylesheet" href="assets/css/consolidated-styles.css">
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Share your feedback with REX Food Delivery">
+    <meta name="keywords" content="feedback, review, food delivery, customer service">
+    <meta name="author" content="TEAM REX">
+    
+    <!-- Security headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;">
+</head>
+<body>
+
+    <!-- Reusable Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section" style="padding: var(--spacing-xl) 0;">
+            <div class="container">
+                <div class="form-container" style="max-width: 600px; margin: 0 auto;">
+                    <div class="text-center" style="margin-bottom: var(--spacing-lg);">
+                        <h1>We Value Your Feedback</h1>
+                        <p class="section-subtitle">Tell us about your experience with our food and service!</p>
+                    </div>
+                    
+                    <!-- Feedback Form -->
+                    <form id="feedback-form" class="feedback-form" novalidate>
+                        <fieldset>
+                            <legend>Customer Feedback Form</legend>
+
+                            <!-- Full Name -->
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    placeholder="Enter your name" 
+                                    required 
+                                    autocomplete="name"
+                                    aria-describedby="name-error"
+                                >
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    placeholder="Enter your email" 
+                                    required 
+                                    autocomplete="email"
+                                    aria-describedby="email-error"
+                                >
+                            </div>
+
+                            <!-- Rating -->
+                            <div class="form-group">
+                                <label for="rating">How was your experience?</label>
+                                <select id="rating" name="rating" required aria-describedby="rating-error">
+                                    <option value="">Select your rating</option>
+                                    <option value="excellent">Excellent ⭐⭐⭐⭐⭐</option>
+                                    <option value="good">Good ⭐⭐⭐⭐</option>
+                                    <option value="average">Average ⭐⭐⭐</option>
+                                    <option value="poor">Poor ⭐⭐</option>
+                                    <option value="terrible">Terrible ⭐</option>
+                                </select>
+                            </div>
+
+                            <!-- Order ID (Optional) -->
+                            <div class="form-group">
+                                <label for="order-id">Order ID (Optional)</label>
+                                <input 
+                                    type="text" 
+                                    id="order-id" 
+                                    name="order-id" 
+                                    placeholder="Enter your order ID if applicable"
+                                    autocomplete="off"
+                                >
+                            </div>
+
+                            <!-- Comments -->
+                            <div class="form-group">
+                                <label for="comments">Your Feedback</label>
+                                <textarea 
+                                    id="comments" 
+                                    name="comments" 
+                                    rows="5" 
+                                    placeholder="Write your review here..." 
+                                    required
+                                    aria-describedby="comments-error"
+                                ></textarea>
+                            </div>
+
+                            <!-- Would you recommend -->
+                            <div class="form-group">
+                                <label style="display: flex; align-items: center; gap: var(--spacing-xs); cursor: pointer;">
+                                    <input type="checkbox" id="recommend" name="recommend" style="width: auto;">
+                                    <span>I would recommend REX Food Delivery to others</span>
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                    <span class="btn-text">Submit Feedback</span>
+                                    <span class="loading" style="display: none;"></span>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                    <!-- Additional Info -->
+                    <div class="text-center" style="margin-top: var(--spacing-lg);">
+                        <p style="color: rgba(255,255,255,0.7);">
+                            <i class="fas fa-shield-alt" style="margin-right: var(--spacing-xs);"></i>
+                            Your feedback helps us improve our service
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Reusable Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- Optimized JavaScript -->
+    <script src="assets/js/app-optimized.js"></script>
+    
+    <!-- Additional Feedback Functionality -->
+    <script>
+        // Enhanced form validation
+        document.getElementById('feedback-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const rating = document.getElementById('rating');
+            const comments = document.getElementById('comments');
+            let isValid = true;
+
+            // Clear previous errors
+            document.querySelectorAll('.field-error').forEach(error => error.remove());
+            document.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+
+            // Validate name
+            if (!name.value.trim()) {
+                showFieldError(name, 'Full name is required');
+                isValid = false;
+            }
+
+            // Validate email
+            if (!email.value.trim()) {
+                showFieldError(email, 'Email is required');
+                isValid = false;
+            } else if (!window.FormValidator.validateEmail(email.value)) {
+                showFieldError(email, 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Validate rating
+            if (!rating.value) {
+                showFieldError(rating, 'Please select a rating');
+                isValid = false;
+            }
+
+            // Validate comments
+            if (!comments.value.trim()) {
+                showFieldError(comments, 'Please provide your feedback');
+                isValid = false;
+            } else if (comments.value.trim().length < 10) {
+                showFieldError(comments, 'Please provide more detailed feedback (at least 10 characters)');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = document.querySelector('button[type="submit"]');
+                const btnText = submitBtn.querySelector('.btn-text');
+                const loading = submitBtn.querySelector('.loading');
+                
+                // Show loading state
+                btnText.textContent = 'Submitting...';
+                loading.style.display = 'inline-block';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Reset form
+                    this.reset();
+                    
+                    // Show success message
+                    window.authManager.showNotification('Thank you for your feedback! We appreciate your time.', 'success');
+                    
+                    // Reset button state
+                    btnText.textContent = 'Submit Feedback';
+                    loading.style.display = 'none';
+                    submitBtn.disabled = false;
+                }, 2000);
+            }
+        });
+
+        // Star rating interaction
+        document.getElementById('rating').addEventListener('change', function() {
+            const ratingText = this.options[this.selectedIndex].text;
+            const ratingGroup = this.closest('.form-group');
+            
+            // Remove existing rating display
+            const existingDisplay = ratingGroup.querySelector('.rating-display');
+            if (existingDisplay) {
+                existingDisplay.remove();
+            }
+            
+            // Add rating display
+            const ratingDisplay = document.createElement('div');
+            ratingDisplay.className = 'rating-display';
+            ratingDisplay.textContent = `Selected: ${ratingText}`;
+            ratingDisplay.style.color = 'var(--accent-color)';
+            ratingDisplay.style.marginTop = '0.5rem';
+            ratingDisplay.style.fontWeight = '600';
+            
+            this.parentNode.appendChild(ratingDisplay);
+        });
+
+        // Character counter for comments
+        const commentsField = document.getElementById('comments');
+        const maxLength = 500;
+        
+        // Create character counter
+        const counter = document.createElement('div');
+        counter.className = 'char-counter';
+        counter.style.cssText = 'text-align: right; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 0.25rem;';
+        counter.textContent = `0/${maxLength} characters`;
+        commentsField.parentNode.appendChild(counter);
+        
+        // Update counter on input
+        commentsField.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            counter.textContent = `${currentLength}/${maxLength} characters`;
+            
+            if (currentLength > maxLength) {
+                counter.style.color = 'var(--primary-color)';
+                this.style.borderColor = 'var(--primary-color)';
+            } else {
+                counter.style.color = 'rgba(255,255,255,0.7)';
+                this.style.borderColor = '';
+            }
+        });
+
+        // Field error helper
+        function showFieldError(field, message) {
+            field.classList.add('error');
+            
+            const errorElement = document.createElement('div');
+            errorElement.className = 'field-error';
+            errorElement.textContent = message;
+            errorElement.style.color = 'var(--primary-color)';
+            errorElement.style.fontSize = '0.9rem';
+            errorElement.style.marginTop = '0.25rem';
+            
+            field.parentNode.appendChild(errorElement);
+        }
+
+        // Auto-focus first empty field
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameField = document.getElementById('name');
+            if (!nameField.value) {
+                nameField.focus();
+            }
+        });
+    </script>
+    
+    <!-- Component Loader -->
+    <script>
+        // Load header and footer components
+        Promise.all([
+            fetch('components/header.html').then(r => r.text()),
+            fetch('components/footer.html').then(r => r.text())
+        ]).then(([headerHtml, footerHtml]) => {
+            document.getElementById('header-container').innerHTML = headerHtml;
+            document.getElementById('footer-container').innerHTML = footerHtml;
+            
+            // Execute component scripts
+            const headerScript = document.createElement('script');
+            headerScript.textContent = document.querySelector('#header-container script').textContent;
+            document.head.appendChild(headerScript);
+            
+            const footerScript = document.createElement('script');
+            footerScript.textContent = document.querySelector('#footer-container script').textContent;
+            document.head.appendChild(footerScript);
+        }).catch(error => {
+            console.error('Error loading components:', error);
+        });
+    </script>
+
+    <!-- Additional CSS for feedback page -->
+    <style>
+        .feedback-form fieldset {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .feedback-form legend {
+            padding: 0 var(--spacing-sm);
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        .rating-display {
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .error {
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1) !important;
+        }
+        
+        .field-error {
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .char-counter {
+            transition: color 0.3s ease;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+    </style>
+
+</body>
+</html>

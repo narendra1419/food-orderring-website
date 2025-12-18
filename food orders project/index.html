@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REX Food Delivery - Home</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/css/consolidated-styles.css" as="style">
+  <link rel="preload" href="assets/js/app-optimized.js" as="script">
+  
+  <!-- External fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Consolidated Stylesheet -->
+  <link rel="stylesheet" href="assets/css/consolidated-styles.css">
+  
+  <!-- Meta tags for SEO and performance -->
+  <meta name="description" content="REX Food Delivery - Your favorite meals, delivered fast! Order delicious food from the best restaurants in your area.">
+  <meta name="keywords" content="food delivery, restaurant, online ordering, Rex FoodZone">
+  <meta name="author" content="TEAM REX">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="REX Food Delivery">
+  <meta property="og:description" content="Delicious food delivered to your doorstep!">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+
+  <!-- Background Video -->
+  <div class="video-container">
+    <video autoplay muted loop class="background-video" playsinline>
+
+      <source src="https://drive.google.com/uc?export=download&id=1R-PQO6Z_LIDxqI6MdxMzabeyCz56KEGN" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Reusable Header Component -->
+  <div id="header-container"></div>
+
+  <!-- Main Section -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>REX RESTAURANT</h1>
+        <p>WELCOME TO OUR FOOD DELIVERY SERVICE</p>
+        <p>Explore our delicious recipes!</p>
+
+        <div class="hero-buttons">
+          <a href="login.html" class="btn btn-primary">GET STARTED</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Features Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Why Choose REX FoodZone?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>Fast Delivery</h3>
+          <p>Get your food delivered in under 30 minutes</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🍽️</div>
+          <h3>Fresh Quality</h3>
+          <p>Made with the freshest ingredients daily</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>Easy Payment</h3>
+          <p>Secure and convenient payment options</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⭐</div>
+          <h3>Top Rated</h3>
+          <p>Highly rated by thousands of customers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="section" style="background: var(--bg-light);">
+    <div class="container">
+      <div class="text-center">
+        <h2>Ready to Order?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: var(--spacing-lg);">Join thousands of satisfied customers</p>
+
+        <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+          <a href="signup.html" class="btn btn-primary" style="font-size: 1.1rem;">Sign Up Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reusable Footer Component -->
+  <div id="footer-container"></div>
+
+  <!-- Optimized JavaScript -->
+  <script src="assets/js/app-optimized.js"></script>
+  
+  <!-- Component Loader -->
+  <script>
+    // Load header and footer components
+    Promise.all([
+      fetch('components/header.html').then(r => r.text()),
+      fetch('components/footer.html').then(r => r.text())
+    ]).then(([headerHtml, footerHtml]) => {
+      document.getElementById('header-container').innerHTML = headerHtml;
+      document.getElementById('footer-container').innerHTML = footerHtml;
+      
+      // Execute component scripts
+      const headerScript = document.createElement('script');
+      headerScript.textContent = document.querySelector('#header-container script').textContent;
+      document.head.appendChild(headerScript);
+      
+      const footerScript = document.createElement('script');
+      footerScript.textContent = document.querySelector('#footer-container script').textContent;
+      document.head.appendChild(footerScript);
+    }).catch(error => {
+      console.error('Error loading components:', error);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!-- ========================================
+     REX FOOD DELIVERY - HEADER COMPONENT
+     Reusable header with navigation
+======================================== -->
+<header id="main-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">REX FoodZone</a>
+      </div>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <!-- Navigation -->
+      <nav id="main-nav" class="main-nav">
+
+
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="main.html" class="nav-link">Menu</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="feedback.html" class="nav-link">Feedback</a></li>
+          <li><a href="login.html" class="nav-link">Login</a></li>
+        </ul>
+      </nav>
+      
+      <!-- Cart Info (for menu page) -->
+      <div class="cart-info" id="cart-info" style="display: none;">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cart-count">0</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Navigation JavaScript -->
+<script>
+// Header and Navigation Functionality
+(function() {
+  'use strict';
+  
+  // DOM Elements
+  const header = document.getElementById('main-header');
+  const navToggle = document.getElementById('nav-toggle');
+  const mainNav = document.getElementById('main-nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  // Mobile Navigation Toggle
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', function() {
+      mainNav.classList.toggle('active');
+      const isActive = mainNav.classList.contains('active');
+      navToggle.setAttribute('aria-expanded', isActive);
+      
+      // Toggle hamburger icon
+      const icon = navToggle.querySelector('i');
+      if (icon) {
+        icon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
+      }
+    });
+  }
+  
+  // Close mobile nav when clicking on links
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (mainNav.classList.contains('active')) {
+        mainNav.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        const icon = navToggle.querySelector('i');
+        if (icon) {
+          icon.className = 'fas fa-bars';
+        }
+      }
+    });
+  });
+  
+  // Close mobile nav when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!header.contains(event.target) && mainNav.classList.contains('active')) {
+      mainNav.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      const icon = navToggle.querySelector('i');
+      if (icon) {
+        icon.className = 'fas fa-bars';
+      }
+    }
+  });
+  
+  // Active link highlighting
+  function setActiveLink() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        link.classList.add('active');
+      }
+    });
+  }
+  
+  // Header scroll effect
+  function handleHeaderScroll() {
+    if (window.scrollY > 100) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+  
+  // Initialize
+  setActiveLink();
+  
+  // Add scroll listener
+  if (window.addEventListener) {
+    window.addEventListener('scroll', handleHeaderScroll);
+  }
+  
+})();
+</script>
+
+<!-- CSS for mobile navigation -->
+<style>
+@media (max-width: 768px) {
+  .main-nav {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    transition: left 0.3s ease;
+    z-index: 998;
+  }
+  
+  .main-nav.active {
+    left: 0;
+  }
+  
+  .nav-list {
+    flex-direction: column;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+  }
+  
+  .nav-list li {
+    width: 100%;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: var(--spacing-sm);
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-toggle {
+    display: block;
+  }
+  
+  .cart-info {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-toggle {
+    display: none;
+  }
+  
+  .main-nav {
+    position: static;
+    background: none;
+    backdrop-filter: none;
+  }
+  
+  .nav-list {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+}
+</style>
